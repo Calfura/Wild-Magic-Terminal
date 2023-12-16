@@ -1,4 +1,4 @@
-
+from wild_magic_functions import spell_list, view_character, spells, wild_magic
 
 print("Welcome to the Wild Magic: Sorcerer terminal app")
 
@@ -27,26 +27,62 @@ except FileNotFoundError:
     print("Creating files...")
 
 # Choice for new character or current saved character
-print("1. Use current saved character")
-print("2. Create new")
+def creation():
+    print("1. Use current saved character")
+    print("2. Create new")
+    print("3. Exit")
+    user = input("Please select an option: ")
+    return user
+    
+creation_choice = ""
 
+while creation_choice != "3":
+    creation_choice = creation()
+    if creation_choice == "1":
+        # Use saved character set
+        break
+    elif creation_choice == "2":
+        # Create new character set
+        break
+    else:
+        print("Invalid response")
 
+# Main menu navigation for each section
+def main_menu():
+    # View current character stat sheet
+    print("1. View character")
+    # View the allowed spell list
+    print("2. Spell-list")
+    # Current learnt spells
+    print("3. Spells")
+    # Wild Surge Table
+    print("4. Wild Surge!!!")
+    # Exit the program
+    print("5. Quit")
+    user = input("Please selection an option: ")
+    return user
 
-# Options
+users_input = ""
 
-print("1. View character")
-print("2. Spellbook")
-print("3. Wild Surge!!!")
-print("4. Quit")
-
-
-
-
-
-
-
-
-
+while users_input != "5":
+    users_input = main_menu()
+    if (users_input) == "1":
+        # View current character stats
+        view_character()
+    elif (users_input) == "2":
+        # View allowed spell list
+        spell_list()
+    elif (users_input) == "3":
+        # Current spells learnt
+        spells()
+    elif (users_input) == "4":
+        # Wild magic table
+        wild_magic()
+    elif (users_input) == "5":
+        # Exit program
+        continue
+    else:
+        print("Invalid response")
 
 # Leave Message
 
