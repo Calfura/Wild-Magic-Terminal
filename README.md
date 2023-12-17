@@ -8,6 +8,10 @@ The application will hold basic information about the character stats to use as 
 
 ## Features
 
+### Character Stats
+
+* Creation of character sheet for stats. Lists out each stat type and their value in order. (WIP) Character stat sheet will add a modifier to the dice roll to increase or decrease dice rolls for attacks or saves.
+
 ### Spells
 
 * Spell-listing - A selection of spells that the terminal program will allow as choices to be added into the spellbook of the character, that the terminal will be able to handle and provide the correct outputs

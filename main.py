@@ -1,6 +1,6 @@
 from wild_magic_functions import spell_list, view_character, spells, wild_magic
 
-print("Welcome to the Wild Magic: Sorcerer terminal app")
+print("======Welcome to the Wild Magic: Sorcerer terminal app=====")
 
 char_file = "character.csv"
 spell_file = "spell.csv"
@@ -28,6 +28,7 @@ except FileNotFoundError:
 
 # Choice for new character or current saved character
 def creation():
+    print("=====Character Menu=====")
     print("1. Use current saved character")
     print("2. Create new")
     print("3. Exit")
@@ -49,6 +50,7 @@ while creation_choice != "3":
 
 # Main menu navigation for each section
 def main_menu():
+    print("=====Main Menu=====")
     # View current character stat sheet
     print("1. View character")
     # View the allowed spell list
@@ -58,7 +60,7 @@ def main_menu():
     # Wild Surge Table
     print("4. Wild Surge!!!")
     # Exit the program
-    print("5. Quit")
+    print("5. Exit Program")
     user = input("Please selection an option: ")
     return user
 
@@ -68,10 +70,10 @@ while users_input != "5":
     users_input = main_menu()
     if (users_input) == "1":
         # View current character stats
-        view_character()
+        view_character(char_file)
     elif (users_input) == "2":
         # View allowed spell list
-        spell_list()
+        spell_list(spell_file)
     elif (users_input) == "3":
         # Current spells learnt
         spells()
