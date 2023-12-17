@@ -1,4 +1,4 @@
-from wild_magic_functions import spell_list, view_character, spells, wild_magic
+from wild_magic_functions import spell_list, view_character, spells, wild_magic, char_create
 
 print("======Welcome to the Wild Magic: Sorcerer terminal app=====")
 
@@ -31,19 +31,19 @@ def creation():
     print("=====Character Menu=====")
     print("1. Use current saved character")
     print("2. Create new")
-    print("3. Exit")
     user = input("Please select an option: ")
     return user
     
 creation_choice = ""
 
-while creation_choice != "3":
+while creation_choice != "1":
     creation_choice = creation()
     if creation_choice == "1":
         # Use saved character set
         break
     elif creation_choice == "2":
         # Create new character set
+        char_create(char_file)
         break
     else:
         print("Invalid response")
