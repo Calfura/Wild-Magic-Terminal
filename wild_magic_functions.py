@@ -1,14 +1,15 @@
 import csv
 from colored import (fg, attr, bg, style)
 import d20
+from math import floor
 
-new_char_file = [['stat', 'value'],
-                 ['STR', ''],
-                 ['DEX', ''],
-                 ['CON', ''],
-                 ['INT', ''],
-                 ['CHA', ''],
-                 ['WIS', '']]
+new_char_file = [['stat', 'value', 'mod'],
+                 ['STR', '', ''],
+                 ['DEX', '', ''],
+                 ['CON', '', ''],
+                 ['INT', '', ''],
+                 ['CHA', '', ''],
+                 ['WIS', '', '']]
 
 wild_magic_table = [['num1', 'num2', 'effect', 'dice'],
                     ['1', '2', 'Roll on this table at the start of each of your turns for the next minute. Ignoring this result on subsequent rolls', '0'],
@@ -31,27 +32,23 @@ spell_book = [['spell', 'level', 'learnt', 'dice'],
                 ['Sleep', '1st Level', 'False', '5d8']]
 
 def csv_create(file1, file2, file3):
+    # Creates all required CSV files needed
     with open(file1, "w") as f:
+        # Character Stat block creation
         writer = csv.writer(f)
         writer.writerows(new_char_file)
     with open(file2,"w") as f:
+        # Spell Book creation
         writer = csv.writer(f)
         writer.writerows(spell_book)
     with open(file3, "w") as f:
+        # Wild Magic Table creation
         writer = csv.writer(f)
         writer.writerows(wild_magic_table)
 
 # Creating a new character
 def char_create(file1, file2, file3):
-    with open(file1, "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(new_char_file)
-    with open(file2,"w") as f:
-        writer = csv.writer(f)
-        writer.writerows(spell_book)
-    with open(file3, "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(wild_magic_table)
+    csv_create(file1, file2, file3)
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Creation====={attr('reset')}")
     # List for coping contents into new character.csv file
     stat_list = []
@@ -60,15 +57,20 @@ def char_create(file1, file2, file3):
         for row in reader:
             # Skips title,value for input
             if row[1] != "value":
-                stat_input = input("Input Stat Value(1-20): ")
+                stat_input = input(f"{row[0]} | Input Stat Value(1-20): ")
+                # Math for modifier for each stat type
+                # Always rounding down to get correct modifier
+                mod_sum = floor(int(stat_input) / 2)
+                # Divide the Total by 2 then reduce by 5 for correct value
+                mod = mod_sum - 5
             # Add's stats line by line to correct Stat types
             if row[1] != "":
                 # Copies filled rows for file write
                 stat_list.append(row)
             else:
                 # Copies name of Stat type and inputs stat value
-                stat_list.append([row[0], stat_input])
-
+                stat_list.append([row[0], stat_input, mod])
+    # Rewrites Character stat file
     with open(file1, "w") as f:
         writer = csv.writer(f)
         writer.writerows(stat_list)
@@ -80,7 +82,7 @@ def view_character(file_name):
         reader.__next__()
         for row in reader:
             # Reading out Character stats
-            print(f"{row[0]} | {row[1]}")
+            print(f"{row[0]} | {row[1]} | {row[2]}")
 
 # Gives a list of allowed spells to be used.
 def spell_list(file_name):
@@ -89,14 +91,7 @@ def spell_list(file_name):
         reader = csv.reader(f)
         reader.__next__()
         for row in reader:
-            # Checking if spell is learnt (True)
-            # Prints out spell name and level
-            # if (row[2] == "True"):
                 print(f"{row[0]} | {row[1]}")
-            # else:
-            #     # continues the loop for the next spell
-            #     continue
-
 
 def spells(file_name):
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Spellbook====={attr('reset')}")
@@ -109,32 +104,36 @@ def spells(file_name):
     while spell_choice != "3":
         if spell_choice == "1":
             # Prints out the Spellbook for the user to see
+            print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Known Spells====={attr('reset')}\n")
             with open(file_name, "r") as f:
                 reader = csv.reader(f)
                 reader.__next__()
                 for row in reader:
-                    print(f"{row[0]} | {row[1]}")
-            break
+                    if row[2] == "True":
+                        print(f"{row[0]} | {row[1]}")
+                break
         elif spell_choice == "2": 
-            # Adding spells
-            # def add_spell():
-            #     # Check condition list for allowed spells.
-            #     spell_add = input("Please add a spell: ")
-            #     spell_level = input("The spell's level: ")
-            #     with open(spell_file, "a") as f:
-            #         writer = csv.writer(f)
-            #         writer.writerow([spell_add, spell_level, True])
-            with open(file_name, "a") as f:
-                spell_name = input("Add choosen spell: ")
+            spell_name = input("Add choosen spell: ")
+            spell_update = []
+            with open(file_name, "r") as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    if (spell_name != row[0]):
+                        spell_update.append(row)
+                    else:
+                        spell_update.append([row[0], row[1], "True", row[3]])
+            with open(file_name, "w") as f:
                 writer = csv.writer(f)
-                writer.writerow([spell_name, "Known"])
+                writer.writerows(spell_update)
             break
 
 # Used for Wild Surge
 def wild_magic(file_name):
     with open(file_name) as f:
         reader = csv.reader(f)
+        # Rolls on the Wild Magic Table
         sample_roll = d20.roll("d20")
+        # F string required output for D20 module
         sample_num = (f"{sample_roll.total}")
         
         for row in reader:
@@ -145,6 +144,7 @@ def wild_magic(file_name):
                     num = (f"{row[3]}")
                     # Rolls from predetermine list inside CSV file
                     r = d20.roll(num)
+                    # Prints total of dice value
                     print(r.total)
                 break
             elif (sample_num == row[1]):
@@ -156,8 +156,3 @@ def wild_magic(file_name):
                     r = d20.roll(num)
                     print(r)
                 break
-
-
-# Dice roll (?)
-def roll():
-    pass

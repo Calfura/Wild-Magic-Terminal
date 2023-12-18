@@ -85,7 +85,7 @@ while users_input != "5":
         view_character(char_file)
     elif (users_input) == "2":
         # View allowed spell list
-        spell_list(allowed_spells)
+        spell_list(spell_file)
     elif (users_input) == "3":
         # Current spells learnt
         spells(spell_file)
