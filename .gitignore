@@ -1,5 +1,5 @@
 .venv
 character.csv
 spell.csv
-spell_list.csv
 __pycache__
+wild_magic_table.csv
