@@ -16,3 +16,7 @@ The application will hold basic information about the character stats to use as 
 
 * Spell-listing - A selection of spells that the terminal program will allow as choices to be added into the spellbook of the character, that the terminal will be able to handle and provide the correct outputs
 * Spells - The selected spell's learnt from the spell-listing that the character know's and that the program can do rolls for and check for any Wild Surges (Spells allowed will be limited in early versions to allow testing and debugging. Additional spells will be added as further developed the program becomes).
+
+### Dice Rolling (Random Number Generator)
+
+* Dice Rolling Module to handle all rolls that are needed for the Wild Magic table, add modifiers to any rolls that are made

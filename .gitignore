@@ -1,4 +1,5 @@
 .venv
 character.csv
 spell.csv
+spell_list.csv
 __pycache__

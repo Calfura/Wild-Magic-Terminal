@@ -1,9 +1,15 @@
-from wild_magic_functions import spell_list, view_character, spells, wild_magic, char_create
+import csv
+from colored import (fg, attr, bg, style)
+from wild_magic_functions import (spell_list, view_character,
+                                   spells, wild_magic, char_create)
+import d20
+from test_functions import wild_magic
 
-print("======Welcome to the Wild Magic: Sorcerer terminal app=====")
 
 char_file = "character.csv"
 spell_file = "spell.csv"
+allowed_spells = "spell_list.csv"
+wild_table = "wild_magic_table.csv"
 
 try:
     # Checking for exsisting character.csv
@@ -16,9 +22,9 @@ try:
     print("Checking files...")
 except FileNotFoundError:
     # Creation of character.csv
-    char_create = open(char_file, "w")
-    char_create.write("stats,value\n")
-    char_create.close()
+    character_create = open(char_file, "w")
+    character_create.write("stats,value\n")
+    character_create.close()
     # Creation of spell.csv
     spell_create = open(spell_file, "w")
     spell_create.write("spell,level,learnt\n")
@@ -28,7 +34,7 @@ except FileNotFoundError:
 
 # Choice for new character or current saved character
 def creation():
-    print("=====Character Menu=====")
+    print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Menu====={attr('reset')}")
     print("1. Use current saved character")
     print("2. Create new")
     user = input("Please select an option: ")
@@ -39,7 +45,7 @@ creation_choice = ""
 while creation_choice != "1":
     creation_choice = creation()
     if creation_choice == "1":
-        # Use saved character set
+        # Use saved character set | Stops error
         break
     elif creation_choice == "2":
         # Create new character set
@@ -50,7 +56,7 @@ while creation_choice != "1":
 
 # Main menu navigation for each section
 def main_menu():
-    print("=====Main Menu=====")
+    print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Main Menu====={attr('reset')}")
     # View current character stat sheet
     print("1. View character")
     # View the allowed spell list
@@ -73,13 +79,13 @@ while users_input != "5":
         view_character(char_file)
     elif (users_input) == "2":
         # View allowed spell list
-        spell_list(spell_file)
+        spell_list(allowed_spells)
     elif (users_input) == "3":
         # Current spells learnt
-        spells()
+        spells(spell_file)
     elif (users_input) == "4":
         # Wild magic table
-        wild_magic()
+        wild_magic(wild_table)
     elif (users_input) == "5":
         # Exit program
         continue
