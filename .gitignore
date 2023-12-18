@@ -1,6 +1,4 @@
 __pycache__
 .venv
-character.csv
-spell.csv
-wild_magic_table.csv
+*.csv
 test_functions.py
