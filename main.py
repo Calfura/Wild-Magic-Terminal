@@ -3,7 +3,7 @@ from colored import (fg, attr, bg, style)
 from wild_magic_functions import (spell_list, view_character,
                                    spells, wild_magic, char_create, csv_create)
 import d20
-from test_functions import wild_magic
+# from test_functions import wild_magic
 
 
 char_file = "character.csv"
