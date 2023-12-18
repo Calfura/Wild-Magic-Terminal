@@ -1,7 +1,7 @@
 import csv
 from colored import (fg, attr, bg, style)
 from wild_magic_functions import (spell_list, view_character,
-                                   spells, wild_magic, char_create)
+                                   spells, wild_magic, char_create, csv_create)
 import d20
 from test_functions import wild_magic
 
@@ -11,6 +11,8 @@ spell_file = "spell.csv"
 allowed_spells = "spell_list.csv"
 wild_table = "wild_magic_table.csv"
 
+
+      
 try:
     # Checking for exsisting character.csv
     char_load = open(char_file, "r")
@@ -18,17 +20,21 @@ try:
     # Checking for exsisting spell.csv
     spell_load = open(spell_file, "r")
     spell_load.close()
+    # Checking for exsiting wild_magic_table.csv
+    wild_table_load = open(wild_table, "r")
+    wild_table_load.close
     # Confirmation of found files
     print("Checking files...")
 except FileNotFoundError:
+    csv_create(char_file, spell_file, wild_table)
     # Creation of character.csv
-    character_create = open(char_file, "w")
-    character_create.write("stats,value\n")
-    character_create.close()
-    # Creation of spell.csv
-    spell_create = open(spell_file, "w")
-    spell_create.write("spell,level,learnt\n")
-    spell_create.close()
+    # character_create = open(char_file, "w")
+    # character_create.write("stats,value\n")
+    # character_create.close()
+    # # Creation of spell.csv
+    # spell_create = open(spell_file, "w")
+    # spell_create.write("spell,level,learnt\n")
+    # spell_create.close()
     # Confirmation of file creation
     print("Creating files...")
 
@@ -49,7 +55,7 @@ while creation_choice != "1":
         break
     elif creation_choice == "2":
         # Create new character set
-        char_create(char_file)
+        char_create(char_file, spell_file, wild_table)
         break
     else:
         print("Invalid response")
