@@ -98,7 +98,7 @@ def spells(file_name):
     # Allows adding of spells into Spellbook
     print("1. Show Spells")
     print("2. Add Spells")
-    print("3. Exit")
+    print("3. Back")
     spell_choice = ""
     spell_choice = input("Please select an option: ")
     while spell_choice != "3":
@@ -156,3 +156,6 @@ def wild_magic(file_name):
                     r = d20.roll(num)
                     print(r)
                 break
+
+def attack_roll():
+    pass

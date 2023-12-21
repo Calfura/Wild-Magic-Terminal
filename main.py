@@ -3,7 +3,7 @@ from colored import (fg, attr, bg, style)
 from wild_magic_functions import (spell_list, view_character,
                                    spells, wild_magic, char_create, csv_create)
 import d20
-# from test_functions import wild_magic
+from test_functions import test_attack
 
 
 char_file = "character.csv"
@@ -26,18 +26,11 @@ try:
     # Confirmation of found files
     print("Checking files...")
 except FileNotFoundError:
+    # Goes straight into Character creation mode
     csv_create(char_file, spell_file, wild_table)
-    # Creation of character.csv
-    # character_create = open(char_file, "w")
-    # character_create.write("stats,value\n")
-    # character_create.close()
-    # # Creation of spell.csv
-    # spell_create = open(spell_file, "w")
-    # spell_create.write("spell,level,learnt\n")
-    # spell_create.close()
-    # Confirmation of file creation
     print("Creating files...")
 
+# 
 # Choice for new character or current saved character
 def creation():
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Menu====={attr('reset')}")
@@ -71,14 +64,16 @@ def main_menu():
     print("3. Spells")
     # Wild Surge Table
     print("4. Wild Surge!!!")
-    # Exit the program
-    print("5. Exit Program")
+    # Attack Roll
+    print("5. Attack")
+    # Exits Program
+    print("6. Exit")
     user = input("Please selection an option: ")
     return user
 
 users_input = ""
 
-while users_input != "5":
+while users_input != "6":
     users_input = main_menu()
     if (users_input) == "1":
         # View current character stats
@@ -93,6 +88,9 @@ while users_input != "5":
         # Wild magic table
         wild_magic(wild_table)
     elif (users_input) == "5":
+        # Attack Command
+        test_attack(spell_file,wild_table)
+    elif (users_input) == "6":
         # Exit program
         continue
     else:
