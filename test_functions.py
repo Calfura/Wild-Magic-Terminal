@@ -48,3 +48,33 @@ def test_attack(file1, file2):
     # 1st level or higher, does roll check for Wild Surge
     # On roll of 1, Surge effect occurs.
     # Roll on Surge table and uses Wild_Surge function
+
+def test_wild_magic(file_name):
+    with open(file_name) as f:
+        reader = csv.reader(f)
+        # Rolls on the Wild Magic Table
+        sample_roll = d20.roll("d20")
+        # F string required output for D20 module
+        sample_num = (f"{sample_roll.total}")
+        
+        for row in reader:
+            if (sample_num == row[0]):
+                print(f"{row[0]} - {row[1]} | {row[2]}")
+                if row[3] != "0":
+                    # Convert into f-string to allow d20 to pull from CSV file
+                    num = (f"{row[3]}")
+                    # Rolls from predetermine list inside CSV file
+                    r = d20.roll(num)
+                    # Prints total of dice value
+                    print(r.total)
+                break
+            elif (sample_num == row[1]):
+                print(f"{row[0]} - {row[1]} | {row[2]}")
+                if row[3] != "0":
+                    # Convert into f-string to allow d20 to pull from CSV file
+                    num = (f"{row[3]}")
+                    # Rolls from predetermine list inside CSV file
+                    r = d20.roll(num)
+                    print(r)
+                break
+            

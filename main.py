@@ -1,9 +1,9 @@
 import csv
 from colored import (fg, attr, bg, style)
 from wild_magic_functions import (spell_list, view_character,
-                                   spells, wild_magic, char_create, csv_create)
+                                   spells, wild_magic, char_create, csv_create, attack)
 import d20
-from test_functions import test_attack
+# from test_functions import test_attack, test_wild_magic
 
 
 char_file = "character.csv"
@@ -89,7 +89,7 @@ while users_input != "6":
         wild_magic(wild_table)
     elif (users_input) == "5":
         # Attack Command
-        test_attack(spell_file,wild_table)
+        attack(spell_file,wild_table)
     elif (users_input) == "6":
         # Exit program
         continue
