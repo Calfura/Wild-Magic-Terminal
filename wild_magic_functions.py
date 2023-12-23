@@ -233,7 +233,8 @@ def attack(file1, file2):
     user_choice = input("Please select option: ")
     # Opens Spell Book and allows user to cast the selected spell
     while user_choice != "2":
-        if user_choice == "1":        
+        if user_choice == "1":
+            spell_list(file1)    
             print("=====Spell Book=====")
             spell_choice = ""
             # Asks user to choose spell to attack with.
@@ -271,4 +272,3 @@ def attack(file1, file2):
                                 print("No Wild Surge")
         # Stops the loop and returns to main menu
         break
-    
