@@ -7,7 +7,6 @@ import d20
 
 char_file = "character.csv"
 spell_file = "spell.csv"
-allowed_spells = "spell_list.csv"
 wild_table = "wild_magic_table.csv"
       
 try:

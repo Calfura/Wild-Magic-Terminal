@@ -271,3 +271,4 @@ def attack(file1, file2):
                                 print("No Wild Surge")
         # Stops the loop and returns to main menu
         break
+    

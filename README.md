@@ -60,7 +60,7 @@ def spells(file_name):
 
 ### Character Creation
 
-Will create all required CSV files apond program launch, when New Character is selected it will overwrite the previous files with fresh ones. When creating a new character it will allow the user to set their stat values for each stat type (STR,DEX,CON,INT,CHA,WIS) and set their modifiers to the correct values (n / 2 - 5 , rounded down for whole value)
+Will create all required CSV files apond program launch, when New Character is selected it will overwrite the previous files with fresh ones. When creating a new character it will allow the user to set their stat values for each stat type (STR,DEX,CON,INT,CHA,WIS) and the program will set their modifiers automatically to the correct values (n / 2 - 5 , rounded down for whole value)
 
 ```py
 def char_create(file1, file2, file3):
@@ -94,7 +94,7 @@ def char_create(file1, file2, file3):
 
 ### Wild Surge
 
-Main feature of the program. CSV containing the table from the Wild Magic Table (1-100) with the effects of each Surge and any rolls that occur with the Wild Surge effect. The user will have a attack command that will let them use any known spells from their spell book, it will do the roll for the attack then checks the level of the spell. Any spell of 1st Level will then have a d20 roll to check for a 1. Each roll will print out the roll value and notify if a Wild Surge occured. On Wild Surge success (fail in D&D), it will then roll on the Wild Magic Table (d100) print out the effect and do any additional rolling required for the outcome to complete.
+Main feature of the program. CSV containing the table from the Wild Magic Table (1-100) with the effects of each Surge and any rolls that occur with the Wild Surge effect. The user will have a attack command that will let them use any known spells from their spell book (user will input the spell name), it will do the roll for the attack then checks the level of the spell. Any spell of 1st Level will then have a d20 roll to check for a 1. Each roll will print out the roll value and notify if a Wild Surge occured. On Wild Surge success (fail in D&D), it will then roll on the Wild Magic Table (d100) print out the effect and do any additional rolling required for the outcome to complete.
 
 ```py
 def attack(file1, file2):
