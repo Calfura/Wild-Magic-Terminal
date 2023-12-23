@@ -3,6 +3,7 @@ from colored import (fg, attr, bg, style)
 import d20
 from math import floor
 
+# Character Stat table data for CSV creation
 new_char_file = [['stat', 'value', 'mod'],
                  ['STR', '', ''],
                  ['DEX', '', ''],
@@ -11,6 +12,7 @@ new_char_file = [['stat', 'value', 'mod'],
                  ['CHA', '', ''],
                  ['WIS', '', '']]
 
+# Wild Magic table data for CSV creation
 wild_magic_table = [["num1","num2","effect","dice"],
                     ["1","2","Roll on this table at the start of each of your turns for the next minute. Ignoring this result on subsequent rolls","0"],
                     ["3","4","For the next minute. You can see any invisible creature if you have line of sight to it","0"],
@@ -63,6 +65,7 @@ wild_magic_table = [["num1","num2","effect","dice"],
                     ["97","98","You are surrounded by faint ethereal music for the next minute","0"],
                     ["99","100","You regain all expended sorcery points","0"]]
 
+# Spell table data for CSV creation
 spell_book = [['spell', 'level', 'learnt', 'dice'],
                 ['Fire Bolt', 'Cantrip','False', '1d10'],
                 ['Chill Touch', 'Cantrip', 'False', '1d8'],
@@ -119,6 +122,7 @@ def view_character(file_name):
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Stats====={attr('reset')}")
     with open(file_name, "r") as f:
         reader = csv.reader(f)
+        # Skips title line
         reader.__next__()
         for row in reader:
             # Reading out Character stats
@@ -129,8 +133,10 @@ def spell_list(file_name):
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Spell-list====={attr('reset')}\n")
     with open(file_name, "r") as f:
         reader = csv.reader(f)
+        # Skips title line
         reader.__next__()
         for row in reader:
+                # Prints out allowed spell list for user
                 print(f"{row[0]} | {row[1]}")
 
 def spells(file_name):
@@ -140,6 +146,7 @@ def spells(file_name):
     print("2. Add Spells")
     print("3. Back")
     spell_choice = ""
+    # User chooses from list above
     spell_choice = input("Please select an option: ")
     while spell_choice != "3":
         if spell_choice == "1":
@@ -147,24 +154,34 @@ def spells(file_name):
             print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Known Spells====={attr('reset')}\n")
             with open(file_name, "r") as f:
                 reader = csv.reader(f)
+                # Skips title line
                 reader.__next__()
                 for row in reader:
+                    # Checks if spell is learnt
                     if row[2] == "True":
+                        # Prints out spell name | spell level
                         print(f"{row[0]} | {row[1]}")
+                # Breaks loop cycle to continue to main menu
                 break
-        elif spell_choice == "2": 
+        elif spell_choice == "2":
+            # Asks user for input
             spell_name = input("Add choosen spell: ")
+            # Tuple for updating file
             spell_update = []
             with open(file_name, "r") as f:
                 reader = csv.reader(f)
                 for row in reader:
+                    # Checks for input and appends into spell_update
                     if (spell_name != row[0]):
                         spell_update.append(row)
+                    # If false, updates chosen spell to being learned ("True")
                     else:
                         spell_update.append([row[0], row[1], "True", row[3]])
+            # Rewrites spell file with updated list
             with open(file_name, "w") as f:
                 writer = csv.writer(f)
                 writer.writerows(spell_update)
+            # Breaks loop to continue to main menu
             break
 
 # Used for Wild Surge
@@ -176,8 +193,12 @@ def wild_magic(file_name):
         # F string required output for D20 module
         sample_num = (f"{sample_roll.total}")
         for row in reader:
+            # Checker for 1st number
             if (sample_num == row[0]):
+                # Prints out Wild Surge
+                # Roll Range = Row[0] - Row[1] | Wild Surge Effect Row[2]
                 print(f"{row[0]} - {row[1]} | {row[2]}")
+                # Checker for dice roll. Skips rolls on 0 value (null)
                 if row[3] != "0":
                     # Convert into f-string to allow d20 to pull from CSV file
                     num = (f"{row[3]}")
@@ -185,20 +206,28 @@ def wild_magic(file_name):
                     r = d20.roll(num)
                     # Prints total of dice value
                     print(r.total)
+                # Breaks loop to continue to main menu
                 break
+            # Checker for 2nd number
             elif (sample_num == row[1]):
+                # Prints out Wild Surge
+                # Roll Range = Row[0] - Row[1] | Wild Surge Effect Row[2]
                 print(f"{row[0]} - {row[1]} | {row[2]}")
+                # Checker for dice roll. Skips rolls on 0 value (null)
                 if row[3] != "0":
                     # Convert into f-string to allow d20 to pull from CSV file
                     num = (f"{row[3]}")
                     # Rolls from predetermine list inside CSV file
                     r = d20.roll(num)
                     print(r)
+                # Breaks loop to continue to main menu
                 break
 
 def attack(file1, file2):
     print("=====Attack Menu=====")
+    # Option for using spells
     print("1. Spell Book")
+    # Option to go back to Main Menu
     print("2. Back")
     # Asks the user to select an option from above
     user_choice = input("Please select option: ")
@@ -207,6 +236,7 @@ def attack(file1, file2):
         if user_choice == "1":        
             print("=====Spell Book=====")
             spell_choice = ""
+            # Asks user to choose spell to attack with.
             spell_choice = input("Choose an attack: ")
             with open(file1, "r") as f:
                 reader = csv.reader(f)
@@ -221,18 +251,23 @@ def attack(file1, file2):
                         print(f"Damage: {r.total}")
                         # Checking if spell is 1st level
                         if row[1] == "1st Level":
-                            # Rolls a d20 to check for wild surge
+                            # Dice to be used for Wild Surge check
                             wild_n = ("1d20")
+                            # Rolls the selected dice
                             wild_r = d20.roll(wild_n)
                             # If dice roll is 1, wild surge will occur
                             if (wild_r.total == 1):
-                                print(f"Roll: {wild_r.total}")   
+                                # Prints out roll value
+                                print(f"Roll: {wild_r.total}")
+                                # Confirmation on Wild Surge
                                 print("Wild Surge!!!")
                                 # Runs wild_magic function on fail
                                 wild_magic(file2)
                             # If dice roll is not 1, executes else block
                             else:
+                                # Prints out roll value
                                 print(f"Roll: {wild_r.total}")
+                                # Confirmation on no Wild Surge
                                 print("No Wild Surge")
         # Stops the loop and returns to main menu
         break

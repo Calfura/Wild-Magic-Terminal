@@ -5,13 +5,10 @@ from wild_magic_functions import (spell_list, view_character,
 import d20
 # from test_functions import test_attack, test_wild_magic
 
-
 char_file = "character.csv"
 spell_file = "spell.csv"
 allowed_spells = "spell_list.csv"
 wild_table = "wild_magic_table.csv"
-
-
       
 try:
     # Checking for exsisting character.csv
@@ -25,17 +22,19 @@ try:
     wild_table_load.close
     # Confirmation of found files
     print("Checking files...")
+# No CSV's found. Creates required files and data
 except FileNotFoundError:
     # Goes straight into Character creation mode
     csv_create(char_file, spell_file, wild_table)
+    # Confirmation of file creation
     print("Creating files...")
 
-# 
 # Choice for new character or current saved character
 def creation():
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Menu====={attr('reset')}")
     print("1. Use current saved character")
     print("2. Create new")
+    # Allows user to create a new character or use previous character
     user = input("Please select an option: ")
     return user
     
@@ -49,8 +48,10 @@ while creation_choice != "1":
     elif creation_choice == "2":
         # Create new character set
         char_create(char_file, spell_file, wild_table)
+        # Breaks loop to begin character creation function
         break
     else:
+        # User used incorrect responses, loops user back
         print("Invalid response")
 
 # Main menu navigation for each section
@@ -68,7 +69,9 @@ def main_menu():
     print("5. Attack")
     # Exits Program
     print("6. Exit")
+    # Ask for user input for the above options
     user = input("Please selection an option: ")
+    # Returns input response for user_input
     return user
 
 users_input = ""
@@ -94,8 +97,8 @@ while users_input != "6":
         # Exit program
         continue
     else:
+        # Incorrect input response. Loops user back
         print("Invalid response")
 
 # Leave Message
-
 print("Thank you for using the Wild Magic: Sorcerer terminal app!!!")

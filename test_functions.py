@@ -39,9 +39,7 @@ def test_attack(file1, file2):
                             else:
                                 print(f"Roll: {wild_r.total}")
                                 print("No Wild Surge")
-        break
-
-                        
+        break         
     # Rolls to attack using modifiers provided
     # Rolls damage for spell (if damaging)
     # Checks the spell level
