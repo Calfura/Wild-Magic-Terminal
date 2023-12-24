@@ -6,8 +6,13 @@ Terminal application for the archetype of Wild Magic Sorcerer's, where it will r
 
 The application will hold basic information about the character stats to use as modifiers for spells casted. A basic spell list will be used/added for the terminal application (as there are far to many spells to add, check and work on within a short amount of time). On first use, the app will create the additional csv files needed to record any data to be used as well as a way to delete old 'saved' files, so the user can add in new character data when appropriate. Additional development will continue to include additional levels, spells and possible archetypes in future.
 
-
 ## References
+
+Neumeyer. A, 2023, A Proven Test Plan Template for Software Testing (Excel), _A proven test plan template for Excel_, web blog post, viewed 26 December 2023, https://www.tacticalprojectmanager.com/test-case-template-excel-with-example/
+
+D20, Dice rolling module, DnD-Beyond, https://github.com/avrae/d20
+
+Rossum. G, Warsaw. B, Coghlan A, 2001, PEP 8 – Style Guide for Python Code, viewed 19 December, https://peps.python.org/pep-0008/
 
 ## GitHub
 
@@ -146,12 +151,6 @@ def attack(file1, file2):
         # Stops the loop and returns to main menu
         break
 ```
-
-## Development Plan
-
-### Character Creation
-
-
 
 ## Design (R8)
 
