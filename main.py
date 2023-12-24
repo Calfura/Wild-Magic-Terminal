@@ -30,6 +30,7 @@ except FileNotFoundError:
 
 # Choice for new character or current saved character
 def creation():
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Menu====={attr('reset')}")
     print("1. Use current saved character")
     print("2. Create new")
@@ -55,6 +56,7 @@ while creation_choice != "1":
 
 # Main menu navigation for each section
 def main_menu():
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Main Menu====={attr('reset')}")
     # View current character stat sheet
     print("1. View character")
