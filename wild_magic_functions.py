@@ -91,7 +91,9 @@ def csv_create(file1, file2, file3):
 
 # Creating a new character
 def char_create(file1, file2, file3):
+    # Calls csv_create to reset csv's to default
     csv_create(file1, file2, file3)
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Creation====={attr('reset')}")
     # List for coping contents into new character.csv file
     stat_list = []
@@ -119,6 +121,7 @@ def char_create(file1, file2, file3):
         writer.writerows(stat_list)
 
 def view_character(file_name):
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Character Stats====={attr('reset')}")
     with open(file_name, "r") as f:
         reader = csv.reader(f)
@@ -130,6 +133,7 @@ def view_character(file_name):
 
 # Gives a list of allowed spells to be used.
 def spell_list(file_name):
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Spell-list====={attr('reset')}\n")
     with open(file_name, "r") as f:
         reader = csv.reader(f)
@@ -140,6 +144,7 @@ def spell_list(file_name):
                 print(f"{row[0]} | {row[1]}")
 
 def spells(file_name):
+    # Shows current menu title
     print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Spellbook====={attr('reset')}")
     # Allows adding of spells into Spellbook
     print("1. Show Spells")
@@ -150,6 +155,7 @@ def spells(file_name):
     spell_choice = input("Please select an option: ")
     while spell_choice != "3":
         if spell_choice == "1":
+            # Shows current menu title
             # Prints out the Spellbook for the user to see
             print(f"{style('bold')}{fg('yellow')}{bg('red')}=====Known Spells====={attr('reset')}\n")
             with open(file_name, "r") as f:
@@ -224,6 +230,7 @@ def wild_magic(file_name):
                 break
 
 def attack(file1, file2):
+    # Shows current menu title
     print("=====Attack Menu=====")
     # Option for using spells
     print("1. Spell Book")
@@ -234,7 +241,8 @@ def attack(file1, file2):
     # Opens Spell Book and allows user to cast the selected spell
     while user_choice != "2":
         if user_choice == "1":
-            spell_list(file1)    
+            spell_list(file1) 
+            # Shows current menu title   
             print("=====Spell Book=====")
             spell_choice = ""
             # Asks user to choose spell to attack with.

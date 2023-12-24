@@ -151,6 +151,3 @@ def attack(file1, file2):
         # Stops the loop and returns to main menu
         break
 ```
-
-## Design (R8)
-
